@@ -7,10 +7,17 @@
       'alertify',
       'commonSrv',
       'localStorageService',
+      'ModalService',
       moviesCtrl,
     ]);
 
-  function moviesCtrl($scope, alertify, commonSrv, localStorageService) {
+  function moviesCtrl(
+    $scope,
+    alertify,
+    commonSrv,
+    localStorageService,
+    ModalService
+  ) {
     const ctrl = this,
       common = commonSrv,
       ls = localStorageService;
@@ -52,6 +59,40 @@
       ctrl.state.movies = results;
       ctrl.state.totalItems = total_results;
       ctrl.state.totalPages = total_pages;
+    };
+
+    ctrl.openTrailer = movieId => {
+      console.log(movieId);
+
+      ModalService.showModal({
+        templateUrl: 'views/modal.html',
+        controller: 'modalCtrl',
+        controllerAs: 'obj',
+        inputs: {
+          movieId,
+        },
+      }).then(function(modal) {
+        // The modal object has the element built, if this is a bootstrap modal
+        // you can call 'modal' to show it, if it's a custom modal just show or hide
+        // it as you need to.
+
+        modal.close.then(function(result) {
+          console.log('closes');
+        });
+      });
+    };
+
+    /**
+     * [search description]
+     * @return {[type]} [description]
+     */
+    ctrl.search = () => {
+      const url =
+        ctrl.searchText !== '' ? common.urls.movieSearch : common.urls.movies;
+      const query = ctrl.searchText !== '' ? '&query=' + ctrl.searchText : '';
+      common.method.get(url, query).then(() => {
+        ctrl._setResults(common.response);
+      });
     };
 
     /**

@@ -4,6 +4,7 @@
     .module('showapp')
     .controller('navCtrl', [
       '$scope',
+      '$location',
       '$state',
       'alertify',
       'commonSrv',
@@ -11,14 +12,22 @@
       navCtrl,
     ]);
 
-  function navCtrl($scope, $state, alertify, commonSrv, localStorageService) {
+  function navCtrl(
+    $scope,
+    $location,
+    $state,
+    alertify,
+    commonSrv,
+    localStorageService
+  ) {
     const nav = this,
       common = commonSrv,
       ls = localStorageService;
 
     const init = () => {
       nav.activeLink = nav.getActiveLink();
-      if (!nav.activeLink) {
+      const path = $location.path();
+      if (!nav.activeLink || path === '/') {
         nav.activeLink = 'movies';
         ls.set('activeLink', nav.activeLink);
         $state.go('main.movies');

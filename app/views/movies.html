@@ -2,11 +2,14 @@
   <div class="search">
     <div class="wrapper">
       <i class="fa fa-search"></i>
-      <input type="text" class="search-input">
+      <input type="text" class="search-input" ng-model="obj.searchText" ng-change="obj.search()">
     </div>
   </div>
   <div class="wrapper">
-    <div ng-repeat="movie in obj.state.movies">
+    <div class="filters">
+
+    </div>
+    <div class="left" ng-repeat="movie in obj.state.movies" ng-click="obj.openTrailer(movie.id)">
       {{movie.title}}
     </div>
     <div ng-repeat="genre in obj.state.movieGenres">{{genre.name}}</div>

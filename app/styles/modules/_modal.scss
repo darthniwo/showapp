@@ -1,0 +1,25 @@
+.modal {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  transition: all linear 0.2s;
+  &__overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+  &__content {
+    background-color: #fff;
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

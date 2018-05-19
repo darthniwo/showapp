@@ -5,4 +5,5 @@ angular.module('showapp', [
   'ngAlertify',
   'LocalStorageModule',
   'ng-pagination',
+  'angularModalService',
 ]);
