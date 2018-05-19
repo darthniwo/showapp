@@ -1,0 +1,27 @@
+.main-header {
+  height: 60px;
+  overflow: hodden;
+  &__logo {
+    float: left;
+    margin-top: 10px;
+    width: 200px;
+  }
+  &__navbar {
+    float: right;
+    margin-top: 5px;
+  }
+  &__navbar-item {
+    border-bottom: solid transparent 2px;
+    font-size: 16px;
+    font-weight: 600;
+    float: left;
+    margin-left: 30px;
+    padding-bottom: 8px;
+    text-transform: capitalize;
+    transition: all linear 0.3s;
+    &.active {
+      color: $light-blue;
+      border-bottom: solid $light-blue 2px;
+    }
+  }
+}
