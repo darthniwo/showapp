@@ -1,1 +1,0 @@
-{"version":3,"sources":["app.js"],"names":["angular","module"],"mappings":"AAAA;;AACAA,QAAQC,MAAR,CAAe,SAAf,EAA0B,CACxB,WADwB,EAExB,WAFwB,EAGxB,YAHwB,EAIxB,oBAJwB,EAKxB,eALwB,CAA1B","file":"app.js","sourcesContent":["'use strict';\nangular.module('showapp', [\n  'ui.router',\n  'ngCookies',\n  'ngAlertify',\n  'LocalStorageModule',\n  'ng-pagination',\n]);\n"]}
