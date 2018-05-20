@@ -28,12 +28,16 @@
      */
     const init = () => {
       console.log('moviesCtrl');
+      const favs = ls.get('favs');
       if (!common.maps.movieGenres) {
         common.getMovieGenres().then(() => {
           ctrl.state.movieGenres = common.maps.movieGenres;
         });
       } else {
         ctrl.state.movieGenres = common.maps.movieGenres;
+      }
+      if (favs && !common.maps.favs) {
+        common.toMap(favs, 'favs', 'id');
       }
     };
 
@@ -122,6 +126,23 @@
      */
     ctrl.truncateOverview = overview => {
       return common.truncate(overview, 200);
+    };
+
+    ctrl.checkFav = item => {
+      const favs = common.maps.favs || {};
+      return Boolean(favs) && favs[item.id] ? 'fa-heart' : 'fa-heart-o';
+    };
+
+    /**
+     * [addToFavs description]
+     * @param {[type]} item [description]
+     */
+    ctrl.addToFavs = item => {
+      debugger;
+      const favs = ls.get('favs') || [];
+      favs.push(item);
+      ls.set('favs', favs);
+      common.toMap(favs, 'favs', 'id');
     };
 
     /**

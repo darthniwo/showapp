@@ -35,18 +35,28 @@
       </div>
     </div>
     <div class="movies">
-      <article class="movie media-content" ng-repeat="movie in obj.state.movies" ng-click="obj.openTrailer(movie.id)">
+      <article class="movie media-content" ng-repeat="movie in obj.state.movies">
         <div class="media-content__img">
           <img ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt={{movie.title}} />
         </div>
-        <section class="media-content__body">
-          <header class="movie__header">
-            {{movie.title}} {{movie.vote_average}}
-            {{movie.release_date}} {{obj.renderGenres(movie.genre_ids)}}
+        <section class="media-content__body relative">
+          <header class="movie__header cf">
+            <h3>{{movie.title}}</h3>
+            <span><i class="fa fa-star"></i> {{movie.vote_average}}</span>
+            <div class="movie__meta-info">
+              {{movie.release_date | date: 'MMM d, y' }} | {{obj.renderGenres(movie.genre_ids)}}
+            </div>
+
           </header>
           <div>
             {{obj.truncateOverview(movie.overview)}}
           </div>
+          <footer class="movie__footer">
+            <button class="btn" type="button" ng-click="obj.openTrailer(movie.id)"><i class="fa fa-youtube-play"></i> Trailer</button>
+            <button type="button" class="right push--right btn btn--link" ng-click="obj.addToFavs(movie)">
+              <span ng-if="obj.checkFav(movie) !== 'fa-heart'">Add to favs</span> <span ng-if="obj.checkFav(movie) === 'fa-heart'">Remove of favs</span> <i class="fa" ng-class="obj.checkFav(movie)"></i>
+            </button>
+          </footer>
         </section>
 
 
