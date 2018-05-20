@@ -1,14 +1,26 @@
 .main-header {
   height: 60px;
   overflow: hodden;
+  @media (max-width: 600px) {
+    height: auto;
+  }
   &__logo {
     float: left;
     margin-top: 10px;
     width: 200px;
+    @media (max-width: 600px) {
+      float: none;
+      margin: 10px auto 20px;
+    }
   }
   &__navbar {
     float: right;
     margin-top: 5px;
+    @media (max-width: 600px) {
+      clear: both;
+      float: none;
+      text-align: center;
+    }
   }
   &__navbar-item {
     border-bottom: solid transparent 2px;
@@ -19,6 +31,10 @@
     padding-bottom: 8px;
     text-transform: capitalize;
     transition: all linear 0.3s;
+    @media (max-width: 600px) {
+      float: none;
+      display: inline-block;
+    }
     &.active {
       color: $light-blue;
       border-bottom: solid $light-blue 2px;

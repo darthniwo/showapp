@@ -36,12 +36,15 @@
     </div>
     <div class="movies">
       <article class="movie media-content" ng-repeat="movie in obj.state.movies">
+        <div class="movie__backdrop">
+          <img ng-src="https://image.tmdb.org/t/p/w1400_and_h450_bestv2{{movie.backdrop_path}}" alt="">
+        </div>
         <div class="media-content__img">
           <img ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt={{movie.title}} />
         </div>
         <section class="media-content__body relative">
           <header class="movie__header cf">
-            <h3>{{movie.title}}</h3>
+            <h3>{{obj.truncateText(movie.title, 25)}}</h3>
             <span><i class="fa fa-star"></i> {{movie.vote_average}}</span>
             <div class="movie__meta-info">
               {{movie.release_date | date: 'MMM d, y' }} | {{obj.renderGenres(movie.genre_ids)}}
@@ -49,7 +52,7 @@
 
           </header>
           <div>
-            {{obj.truncateOverview(movie.overview)}}
+            {{obj.truncateText(movie.overview, 200)}}
           </div>
           <footer class="movie__footer">
             <button class="btn" type="button" ng-click="obj.openTrailer(movie.id)"><i class="fa fa-youtube-play"></i> Trailer</button>

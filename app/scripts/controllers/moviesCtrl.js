@@ -120,12 +120,13 @@
     };
 
     /**
-     * [truncateOverview description]
-     * @param  {[type]} overview [description]
-     * @return {[type]}          [description]
+     * [truncateText description]
+     * @param  {[type]} text  [description]
+     * @param  {[type]} chars [description]
+     * @return {[type]}       [description]
      */
-    ctrl.truncateOverview = overview => {
-      return common.truncate(overview, 200);
+    ctrl.truncateText = (text, chars) => {
+      return common.truncate(text, chars);
     };
 
     /**
