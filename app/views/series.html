@@ -35,12 +35,13 @@
       </div>
     </div>
     <div class="movies">
+      <div class="empty-state" ng-show="obj.state.series.length==0">Dude, where are the tv shows ... ?</div>
       <article class="movie media-content" ng-repeat="serie in obj.state.series">
         <div class="movie__backdrop">
           <img ng-src="https://image.tmdb.org/t/p/w1400_and_h450_bestv2{{serie.backdrop_path}}" alt="">
         </div>
         <div class="media-content__img">
-          <img ng-src="http://image.tmdb.org/t/p/w500{{serie.poster_path}}" alt={{serie.title}} />
+          <img ng-src="http://image.tmdb.org/t/p/w500{{serie.poster_path}}" alt={{serie.original_name}} />
         </div>
         <section class="media-content__body relative">
           <header class="movie__header cf">

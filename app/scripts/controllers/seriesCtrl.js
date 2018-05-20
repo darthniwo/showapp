@@ -177,7 +177,7 @@
           : '';
       const year =
         ctrl.filters.yearSelected.id !== 0
-          ? '&year=' + ctrl.filters.yearSelected.id
+          ? '&first_air_date_year=' + ctrl.filters.yearSelected.id
           : '';
       return {url, extras: query + genres + year};
     };

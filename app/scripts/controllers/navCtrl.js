@@ -34,7 +34,7 @@
       }
     };
 
-    nav.locations = ['movies', 'series', 'favourites'];
+    nav.locations = ['movies', 'series', 'favorites'];
 
     nav.navigate = location => {
       nav.activeLink = location;

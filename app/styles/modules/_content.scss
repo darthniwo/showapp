@@ -2,6 +2,17 @@
   clear: both;
 }
 
+.empty-state {
+  border: dashed #306f88 1px;
+  background-color: $light-blue;
+  color: #306f88;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+}
+
 .search {
   background-color: #efefef;
   margin-bottom: 40px;

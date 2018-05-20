@@ -1,3 +1,40 @@
-<div ui-view="movies">
-  favs
+<div ui-view="favs">
+
+  <div class="wrapper">
+    <h2 class="subtitle">My Favorites</h2>
+    <div class="movies">
+      <div class="empty-state" ng-show="obj.state.favs.length==0">Always remember Frodo, the Favorites are trying to get back to their master.</div>
+      <article class="movie media-content" ng-repeat="fav in obj.state.favs">
+        <div class="movie__backdrop">
+          <img ng-src="https://image.tmdb.org/t/p/w1400_and_h450_bestv2{{fav.backdrop_path}}" alt="">
+        </div>
+        <div class="media-content__img">
+          <img ng-src="http://image.tmdb.org/t/p/w500{{fav.poster_path}}" alt={{movie.title}} />
+        </div>
+        <section class="media-content__body relative">
+          <header class="movie__header cf">
+            <h3>{{obj.truncateText(fav.title, 25)}}</h3>
+            <span><i class="fa fa-star"></i> {{fav.vote_average}}</span>
+            <div class="movie__meta-info">
+              {{fav.release_date | date: 'MMM d, y' }} | {{obj.renderGenres(fav.genre_ids, fav)}}
+            </div>
+
+          </header>
+          <div>
+            {{obj.truncateText(fav.overview, 200)}}
+          </div>
+          <footer class="movie__footer">
+            <button class="btn" type="button" ng-click="obj.openTrailer(fav)"><i class="fa fa-youtube-play"></i> Trailer</button>
+            <button type="button" class="right push--right btn btn--link" ng-click="obj.toggleFav(fav)">
+              <span>Remove</span> <i class="fa fa-heart"></i>
+            </button>
+          </footer>
+        </section>
+
+
+      </article>
+    </div>
+
+
+  </div>
 </div>

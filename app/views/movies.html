@@ -35,6 +35,7 @@
       </div>
     </div>
     <div class="movies">
+      <div class="empty-state" ng-show="obj.state.movies.length==0">This is not the movie you're looking for.</div>
       <article class="movie media-content" ng-repeat="movie in obj.state.movies">
         <div class="movie__backdrop">
           <img ng-src="https://image.tmdb.org/t/p/w1400_and_h450_bestv2{{movie.backdrop_path}}" alt="">

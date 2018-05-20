@@ -30,7 +30,7 @@
         controller: 'seriesCtrl',
         controllerAs: 'obj',
       })
-      .state('main.favourites', {
+      .state('main.favorites', {
         url: 'favourites',
         templateUrl: 'views/favs.html',
         controller: 'favsCtrl',
