@@ -6,4 +6,6 @@ angular.module('showapp', [
   'LocalStorageModule',
   'ng-pagination',
   'angularModalService',
+  'ui.select',
+  'ngSanitize',
 ]);

@@ -2,12 +2,31 @@
   <div class="search">
     <div class="wrapper">
       <i class="fa fa-search"></i>
-      <input type="text" class="search-input" ng-model="obj.searchText" ng-change="obj.search()">
+      <input type="text" class="search-input" ng-model="obj.filters.searchText" ng-change="obj.search()">
     </div>
   </div>
   <div class="wrapper">
-    <div class="filters">
-
+    <div class="filters cf">
+      <div class="year-selection left push--right">
+        <ui-select ng-model="obj.filters.yearSelected" theme="selectize" on-select="obj.search()">
+            <ui-select-match>{{$select.selected.label}}</ui-select-match>
+            <ui-select-choices repeat="year in obj.years | filter: {$: $select.search}">
+                <small>
+                  <span ng-bind-html="''+year.label | highlight: $select.search"></span>
+                </small>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="genre-selection left">
+        <ui-select multiple ng-model="obj.filters.genreSelected" theme="selectize" on-select="obj.search()">
+            <ui-select-match>{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="genre in obj.state.movieGenres.src | filter: {$: $select.search}">
+                <small>
+                  <span ng-bind-html="''+genre.name | highlight: $select.search"></span>
+                </small>
+            </ui-select-choices>
+        </ui-select>
+      </div>
     </div>
     <div class="left" ng-repeat="movie in obj.state.movies" ng-click="obj.openTrailer(movie.id)">
       {{movie.title}}

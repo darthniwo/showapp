@@ -44,6 +44,13 @@
       });
     };
 
+    common.getSelectedGenresIds = array => {
+      const ids = [];
+      return array.map(genre => {
+        return genre.id;
+      });
+    };
+
     common.method = {
       get: (endPoint, extras = '') => {
         return $http({
