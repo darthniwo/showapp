@@ -56,7 +56,7 @@
           </div>
           <footer class="movie__footer">
             <button class="btn" type="button" ng-click="obj.openTrailer(movie.id)"><i class="fa fa-youtube-play"></i> Trailer</button>
-            <button type="button" class="right push--right btn btn--link" ng-click="obj.addToFavs(movie)">
+            <button type="button" class="right push--right btn btn--link" ng-click="obj.toggleFav(movie)">
               <span ng-if="!obj.checkFav(movie)">Add to favs</span> <span ng-if="obj.checkFav(movie)">Remove</span> <i class="fa" ng-class="obj.getFavClass(movie)"></i>
             </button>
           </footer>

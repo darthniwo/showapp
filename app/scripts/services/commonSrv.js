@@ -8,7 +8,7 @@
     const common = {maps: {}};
 
     /**
-     * [urls description]
+     * [urls: General endpoint urls of the API]
      * @type {Object}
      */
     common.urls = {
@@ -23,13 +23,13 @@
       tvDetail: '/tv/',
     };
     /**
-     * [apiKey description]
+     * [apiKey: Required key for API use]
      * @type {String}
      */
     common.apiKey = '?api_key=09b9ece1e65a600aca53a9b246cedd9e';
 
     /**
-     * [years description]
+     * [years: Array of year values used in filters section]
      * @type {Array}
      */
     common.years = [
@@ -56,11 +56,18 @@
     ];
 
     /**
-     * [response description]
-     * @type {[type]}
+     * [response: General internal variable in which every call response will be stored]
+     * @type {[Depending on the response: Array - Object]}
      */
     common.response = null;
 
+    /**
+     * [toMap: Method to construct an map object with the key provided]
+     * @param  {[Array]} array   [Array of elements to be mapped]
+     * @param  {[String]} mapName [Desired map name, it will be used as key to access the map]
+     * @param  {[String]} key     [Parameter to be used as main object key for the map]
+     * @return {[Object]}         [Resulting object map]
+     */
     common.toMap = (array, mapName, key) => {
       if (!common.maps[mapName]) {
         common.maps[mapName] = {};
@@ -72,10 +79,10 @@
     };
 
     /**
-     * [truncate description]
-     * @param  {[type]} str   [description]
-     * @param  {[type]} chars [description]
-     * @return {[type]}       [description]
+     * [truncate: method for truncating strings]
+     * @param  {[String]} str   [String to be truncated]
+     * @param  {[Integer]} chars [Desired character length for truncating the string]
+     * @return {[String]}       [Truncated string with an ellipsis at the end]
      */
     common.truncate = (str, chars) => {
       let text = str;
@@ -89,8 +96,8 @@
     };
 
     /**
-     * [getMovieGenres description]
-     * @return {[type]} [description]
+     * [getMovieGenres: Method to retrieve the genres used in movie search]
+     * @return {[Object]} [Map object with the original array, located in {src} key ]
      */
     common.getMovieGenres = () => {
       return common.method.get(common.urls.movieGenres).then(() => {
@@ -100,8 +107,8 @@
     };
 
     /**
-     * [getTVGenres description]
-     * @return {[type]} [description]
+     * [getTVGenres: Method to retrieve the genres used in movie search]
+     * @return {[Object]} [Map object with the original array, located in {src} key ]
      */
     common.getTVGenres = () => {
       return common.method.get(common.urls.tvGenres).then(() => {
@@ -111,25 +118,16 @@
     };
 
     /**
-     * [getSelectedGenresIds description]
-     * @param  {[type]} array [description]
-     * @return {[type]}       [description]
+     * [getSelectedGenresIds: Method to get the ids of the selected genres in the filter]
+     * @param  {[Array]} array [Object's array of the selected genres]
+     * @return {[Array]}       [Array of ids]
      */
     common.getSelectedGenresIds = array => {
       return array.map(genre => genre.id);
     };
 
     /**
-     * [getGenreString description]
-     * @param  {[type]} array [description]
-     * @return {[type]}       [description]
-     */
-    common.getGenreString = array => {
-      return array.map(genre => genre.name);
-    };
-
-    /**
-     * [method description]
+     * [method: General Methods object, only uses get for now]
      * @type {Object}
      */
     common.method = {

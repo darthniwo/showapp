@@ -23,11 +23,10 @@
       ls = localStorageService;
 
     /**
-     * [init description]
-     * @return {[type]} [description]
+     * [init: Method to initialize inner variables and states]
+     * @return {[N/A]} [void]
      */
     const init = () => {
-      console.log('moviesCtrl');
       const favs = ls.get('favs');
       if (!common.maps.movieGenres) {
         common.getMovieGenres().then(() => {
@@ -42,13 +41,13 @@
     };
 
     /**
-     * [years description]
+     * [years: Store the years for filter use]
      * @type {Array}
      */
     ctrl.years = common.years;
 
     /**
-     * [state description]
+     * [state: Main variables of the controller]
      * @type {Object}
      */
     ctrl.state = {
@@ -61,7 +60,7 @@
     };
 
     /**
-     * [filters description]
+     * [filters: Controller UI filters used on view]
      * @type {Object}
      */
     ctrl.filters = {
@@ -71,8 +70,8 @@
     };
 
     /**
-     * [_setResults description]
-     * @param {[type]} data [description]
+     * [_setResults: Method for setting the response results afer search on the controller]
+     * @param {[Object]} data [Results variable]
      */
     ctrl._setResults = data => {
       const {results, total_pages, total_results} = data;
@@ -81,18 +80,12 @@
       ctrl.state.totalPages = total_pages;
     };
 
-    ctrl.getGenreString = () => {
-      return 'genres';
-    };
-
     /**
-     * [openTrailer description]
-     * @param  {[type]} movieId [description]
-     * @return {[type]}         [description]
+     * [openTrailer: Method for triggering the modal that shows the trailer]
+     * @param  {[Integer]} movieId [Movie ID for searching details]
+     * @return {[N/A]}         [void]
      */
     ctrl.openTrailer = movieId => {
-      console.log(movieId);
-
       ModalService.showModal({
         templateUrl: 'views/modal.html',
         controller: 'modalCtrl',
@@ -101,16 +94,14 @@
           movieId,
         },
       }).then(function(modal) {
-        modal.close.then(function(result) {
-          console.log('closes');
-        });
+        modal.close.then(function(result) {});
       });
     };
 
     /**
-     * [renderGenres description]
-     * @param  {[type]} genres [description]
-     * @return {[type]}        [description]
+     * [renderGenres: Method for render the genre's name for a giving set of genres]
+     * @param  {[Array]} genres [Array of ids provided on every movie object]
+     * @return {[String]}        [String with ganres names sepparated by comma]
      */
     ctrl.renderGenres = genres => {
       const filteredGenres = ctrl.state.movieGenres.src.filter(genre => {
@@ -120,39 +111,39 @@
     };
 
     /**
-     * [truncateText description]
-     * @param  {[type]} text  [description]
-     * @param  {[type]} chars [description]
-     * @return {[type]}       [description]
+     * [truncateText: Local truncate method]
+     * @param  {[String]} text  [Text to be truncated]
+     * @param  {[Integer]} chars [Chars to truncate]
+     * @return {[String]}       [Truncated string with an ellipsis at the end]
      */
     ctrl.truncateText = (text, chars) => {
       return common.truncate(text, chars);
     };
 
     /**
-     * [checkFav description]
-     * @param  {[type]} item [description]
-     * @return {[type]}      [description]
+     * [checkFav: Method for checking if the selected movie has been marked as favourite]
+     * @param  {[Object]} item [Movie object]
+     * @return {[Boolean]}      [True or false, depending on the check] // can be refactored
      */
     ctrl.checkFav = item => {
       const favs = common.maps.favs || {};
-      return Boolean(favs) && favs[item.id] ? true : false;
+      return Boolean(favs) && favs[item.id];
     };
 
     /**
-     * [getFavClass description]
-     * @param  {[type]} item [description]
-     * @return {[type]}      [description]
+     * [getFavClass: Method returning the used to show if the movie has been marked as favourite]
+     * @param  {[Object]} item [Movie object]
+     * @return {[String]}      [Class used on view (string)]
      */
     ctrl.getFavClass = item => {
       return ctrl.checkFav(item) ? 'fa-heart' : 'fa-heart-o';
     };
 
     /**
-     * [addToFavs description]
-     * @param {[type]} item [description]
+     * [toggleFav: MEthod used to mark/unmark a movie as favourite]
+     * @param {[Object]} item [Movie object]
      */
-    ctrl.addToFavs = item => {
+    ctrl.toggleFav = item => {
       let favStorage = ls.get('favs') || [];
       const {favs} = common.maps;
       if (Boolean(favs) && favs[item.id]) {
@@ -166,10 +157,10 @@
     };
 
     /**
-     * [getSearchUrl description]
-     * @return {[type]} [description]
+     * [_getSearchUrl: Inner method to create the final search url]
+     * @return {[String]} [Search URL]
      */
-    ctrl.getSearchUrl = () => {
+    ctrl._getSearchUrl = () => {
       const url =
         ctrl.filters.searchText !== ''
           ? common.urls.movieSearch
@@ -191,24 +182,24 @@
     };
 
     /**
-     * [search description]
-     * @return {[type]} [description]
+     * [search: Main search method]
+     * @return {[Array]} [Response from the get method]
      */
     ctrl.search = () => {
-      const searchTerms = ctrl.getSearchUrl();
+      const searchTerms = ctrl._getSearchUrl();
       common.method.get(searchTerms.url, searchTerms.extras).then(() => {
         ctrl._setResults(common.response);
       });
     };
 
     /**
-     * [onPageChange description]
-     * @param  {[type]} page [description]
-     * @return {[type]}      [description]
+     * [onPageChange: Mehotd used on every page change]
+     * @param  {[Integer]} page [Page number]
+     * @return {[Array]} [Response from the get method]
      */
     ctrl.onPageChange = page => {
       const nextPage = '&page=' + page;
-      const searchTerms = ctrl.getSearchUrl();
+      const searchTerms = ctrl._getSearchUrl();
       common.method
         .get(searchTerms.url, searchTerms.extras + nextPage)
         .then(() => {
