@@ -35,12 +35,6 @@
         templateUrl: 'views/favs.html',
         controller: 'favsCtrl',
         controllerAs: 'obj',
-      })
-      .state('main.detail', {
-        url: 'detail/:key',
-        templateUrl: 'views/detail.html',
-        controller: 'detailCtrl',
-        controllerAs: 'obj',
       });
   }
 })(angular);

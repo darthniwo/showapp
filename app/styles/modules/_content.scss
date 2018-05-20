@@ -4,6 +4,7 @@
 
 .search {
   background-color: #efefef;
+  margin-bottom: 40px;
   padding: 10px 0;
   input {
     padding: 0 10px;
@@ -12,10 +13,75 @@
   }
 }
 
+.subtitle {
+  margin-bottom: 30px;
+}
+
+.filters {
+  margin-bottom: 30px;
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+}
+
 .year-selection {
   width: 200px;
 }
 
 .genre-selection {
-  width: 300px;
+  width: 350px;
+  .selectize-input {
+    height: 36px !important;
+  }
+  .selectize-input > input {
+    position: absolute;
+  }
+}
+
+.movies {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+}
+
+.movie {
+  border: solid #ededed 1px;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.4);
+  flex-basis: 50%;
+  margin: 0 2% 50px 0;
+  max-width: 47.5%;
+  @media (max-width: 992px) {
+    flex-basis: 100%;
+    max-width: 98%;
+  }
+  & .media-content__img {
+    height: 270px;
+    margin-right: 15px;
+    overflow: hidden;
+    width: 185px;
+  }
+}
+
+.pagination {
+  .page {
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px 10px;
+    &.active {
+      font-weight: 600;
+      color: $light-blue;
+    }
+    &.disabled {
+      background-color: #eee;
+      cursor: not-allowed;
+    }
+  }
 }

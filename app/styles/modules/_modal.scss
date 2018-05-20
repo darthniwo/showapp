@@ -5,6 +5,7 @@
   left: 0;
   width: 100vw;
   transition: all linear 0.2s;
+  z-index: 1;
   &__overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;

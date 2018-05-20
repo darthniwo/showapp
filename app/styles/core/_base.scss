@@ -128,9 +128,13 @@ ul {
 }
 
 .wrapper {
+  box-sizing: border-box;
   padding: 0 12px;
   margin: 0 auto;
   width: 1200px;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 }
 
 .alertify .alert .msg,

@@ -2,12 +2,14 @@
   <div class="search">
     <div class="wrapper">
       <i class="fa fa-search"></i>
-      <input type="text" class="search-input" ng-model="obj.filters.searchText" ng-change="obj.search()">
+      <input type="text" placeholder="Search for a movie..." class="search-input" ng-model="obj.filters.searchText" ng-change="obj.search()">
     </div>
   </div>
   <div class="wrapper">
+    <h2 class="subtitle">Discover new movies</h2>
     <div class="filters cf">
       <div class="year-selection left push--right">
+        <label>Year</label>
         <ui-select ng-model="obj.filters.yearSelected" theme="selectize" on-select="obj.search()">
             <ui-select-match>{{$select.selected.label}}</ui-select-match>
             <ui-select-choices repeat="year in obj.years | filter: {$: $select.search}">
@@ -18,7 +20,8 @@
         </ui-select>
       </div>
       <div class="genre-selection left">
-        <ui-select multiple ng-model="obj.filters.genreSelected" theme="selectize" on-select="obj.search()">
+        <label>Genre</label>
+        <ui-select multiple ng-model="obj.filters.genreSelected" limit="3" theme="selectize" on-select="obj.search()" on-remove="obj.search()">
             <ui-select-match>{{$item.name}}</ui-select-match>
             <ui-select-choices repeat="genre in obj.state.movieGenres.src | filter: {$: $select.search}">
                 <small>
@@ -27,11 +30,29 @@
             </ui-select-choices>
         </ui-select>
       </div>
+      <div class="left">
+        <pagination count="obj.state.totalItems" take="obj.state.limit" activate="obj.onPageChange"></pagination>
+      </div>
     </div>
-    <div class="left" ng-repeat="movie in obj.state.movies" ng-click="obj.openTrailer(movie.id)">
-      {{movie.title}}
+    <div class="movies">
+      <article class="movie media-content" ng-repeat="movie in obj.state.movies" ng-click="obj.openTrailer(movie.id)">
+        <div class="media-content__img">
+          <img ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt={{movie.title}} />
+        </div>
+        <section class="media-content__body">
+          <header class="movie__header">
+            {{movie.title}} {{movie.vote_average}}
+            {{movie.release_date}} {{obj.renderGenres(movie.genre_ids)}}
+          </header>
+          <div>
+            {{obj.truncateOverview(movie.overview)}}
+          </div>
+        </section>
+
+
+      </article>
     </div>
-    <div ng-repeat="genre in obj.state.movieGenres">{{genre.name}}</div>
-    <pagination count="obj.state.totalItems" take="obj.state.limit" activate="obj.onPageChange"></pagination>
+
+
   </div>
 </div>
