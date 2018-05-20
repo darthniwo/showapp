@@ -128,9 +128,23 @@
       return common.truncate(overview, 200);
     };
 
+    /**
+     * [checkFav description]
+     * @param  {[type]} item [description]
+     * @return {[type]}      [description]
+     */
     ctrl.checkFav = item => {
       const favs = common.maps.favs || {};
-      return Boolean(favs) && favs[item.id] ? 'fa-heart' : 'fa-heart-o';
+      return Boolean(favs) && favs[item.id] ? true : false;
+    };
+
+    /**
+     * [getFavClass description]
+     * @param  {[type]} item [description]
+     * @return {[type]}      [description]
+     */
+    ctrl.getFavClass = item => {
+      return ctrl.checkFav(item) ? 'fa-heart' : 'fa-heart-o';
     };
 
     /**
@@ -138,11 +152,16 @@
      * @param {[type]} item [description]
      */
     ctrl.addToFavs = item => {
-      debugger;
-      const favs = ls.get('favs') || [];
-      favs.push(item);
-      ls.set('favs', favs);
-      common.toMap(favs, 'favs', 'id');
+      let favStorage = ls.get('favs') || [];
+      const {favs} = common.maps;
+      if (Boolean(favs) && favs[item.id]) {
+        delete favs[item.id];
+        favStorage = favStorage.filter(fav => fav.id !== item.id);
+      } else {
+        favStorage.push(item);
+      }
+      ls.set('favs', favStorage);
+      common.toMap(favStorage, 'favs', 'id');
     };
 
     /**

@@ -15,12 +15,25 @@
   &__content {
     background-color: #fff;
     height: 300px;
-    width: 300px;
+    width: 600px;
     position: absolute;
     margin: auto;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    iframe {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      z-index: 2;
+    }
+    .close {
+      color: #fff;
+      font-size: 20px;
+      position: absolute;
+      top: -29px;
+      right: -7px;
+    }
   }
 }

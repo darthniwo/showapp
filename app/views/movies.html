@@ -30,7 +30,7 @@
             </ui-select-choices>
         </ui-select>
       </div>
-      <div class="left">
+      <div class="pagination-container">
         <pagination count="obj.state.totalItems" take="obj.state.limit" activate="obj.onPageChange"></pagination>
       </div>
     </div>
@@ -54,7 +54,7 @@
           <footer class="movie__footer">
             <button class="btn" type="button" ng-click="obj.openTrailer(movie.id)"><i class="fa fa-youtube-play"></i> Trailer</button>
             <button type="button" class="right push--right btn btn--link" ng-click="obj.addToFavs(movie)">
-              <span ng-if="obj.checkFav(movie) !== 'fa-heart'">Add to favs</span> <span ng-if="obj.checkFav(movie) === 'fa-heart'">Remove of favs</span> <i class="fa" ng-class="obj.checkFav(movie)"></i>
+              <span ng-if="!obj.checkFav(movie)">Add to favs</span> <span ng-if="obj.checkFav(movie)">Remove</span> <i class="fa" ng-class="obj.getFavClass(movie)"></i>
             </button>
           </footer>
         </section>

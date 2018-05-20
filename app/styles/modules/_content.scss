@@ -105,6 +105,16 @@
   }
 }
 
+.pagination-container {
+  float: left;
+  margin-top: 30px;
+  margin-left: 10px;
+  @media (max-width: 1024px) {
+    margin-left: 0px;
+    clear: left;
+  }
+}
+
 .pagination {
   .page {
     border: solid 1px #ccc;

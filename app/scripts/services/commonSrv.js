@@ -19,6 +19,8 @@
       movies: '/discover/movie',
       movieSearch: '/search/movie',
       tvSearch: '/search/tv',
+      movieDetail: '/movie/',
+      tvDetail: '/tv/',
     };
     /**
      * [apiKey description]

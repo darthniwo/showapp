@@ -8,4 +8,5 @@ angular.module('showapp', [
   'angularModalService',
   'ui.select',
   'ngSanitize',
+  'youtube-embed',
 ]);

@@ -1,7 +1,12 @@
 <div class="modal">
   <div class="modal__overlay"></div>
   <div class="modal__content">
-    Hola soy el modal
-    <button type="button" ng-click="obj.closeModal()">Cerrar</button>
+    <button type="button" class="close" ng-click="obj.closeModal()"><i class="fa fa-close"></i></button>
+    <div class="orbit-spinner" ng-if="!obj.loading">
+      <div class="orbit"></div>
+      <div class="orbit"></div>
+      <div class="orbit"></div>
+    </div>
+    <iframe ng-src="{{obj.trailer}}" frameborder="0"></iframe>
   </div>
 </div>
