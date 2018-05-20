@@ -1,6 +1,71 @@
 <div ui-view="series">
-  series
-  <div ng-repeat="show in obj.state.series">
-    {{show.name}}
+  <div class="search">
+    <div class="wrapper">
+      <i class="fa fa-search"></i>
+      <input type="text" placeholder="Search for a tv show..." class="search-input" ng-model="obj.filters.searchText" ng-change="obj.search()">
+    </div>
+  </div>
+  <div class="wrapper">
+    <h2 class="subtitle">Discover new shows</h2>
+    <div class="filters cf">
+      <div class="year-selection left push--right">
+        <label>Year</label>
+        <ui-select ng-model="obj.filters.yearSelected" theme="selectize" on-select="obj.search()">
+            <ui-select-match>{{$select.selected.label}}</ui-select-match>
+            <ui-select-choices repeat="year in obj.years | filter: {$: $select.search}">
+                <small>
+                  <span ng-bind-html="''+year.label | highlight: $select.search"></span>
+                </small>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="genre-selection left">
+        <label>Genre</label>
+        <ui-select multiple ng-model="obj.filters.genreSelected" limit="3" theme="selectize" on-select="obj.search()" on-remove="obj.search()">
+            <ui-select-match>{{$item.name}}</ui-select-match>
+            <ui-select-choices repeat="genre in obj.state.tvGenres.src | filter: {$: $select.search}">
+                <small>
+                  <span ng-bind-html="''+genre.name | highlight: $select.search"></span>
+                </small>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="pagination-container">
+        <pagination count="obj.state.totalItems" take="obj.state.limit" activate="obj.onPageChange"></pagination>
+      </div>
+    </div>
+    <div class="movies">
+      <article class="movie media-content" ng-repeat="serie in obj.state.series">
+        <div class="movie__backdrop">
+          <img ng-src="https://image.tmdb.org/t/p/w1400_and_h450_bestv2{{serie.backdrop_path}}" alt="">
+        </div>
+        <div class="media-content__img">
+          <img ng-src="http://image.tmdb.org/t/p/w500{{serie.poster_path}}" alt={{serie.title}} />
+        </div>
+        <section class="media-content__body relative">
+          <header class="movie__header cf">
+            <h3>{{obj.truncateText(serie.original_name, 25)}}</h3>
+            <span><i class="fa fa-star"></i> {{serie.vote_average}}</span>
+            <div class="movie__meta-info">
+              {{serie.first_air_date | date: 'MMM d, y' }} | {{obj.renderGenres(serie.genre_ids)}}
+            </div>
+
+          </header>
+          <div>
+            {{obj.truncateText(serie.overview, 200)}}
+          </div>
+          <footer class="movie__footer">
+            <button class="btn" type="button" ng-click="obj.openTrailer(serie.id)"><i class="fa fa-youtube-play"></i> Trailer</button>
+            <button type="button" class="right push--right btn btn--link" ng-click="obj.toggleFav(serie)">
+              <span ng-if="!obj.checkFav(serie)">Add to favs</span> <span ng-if="obj.checkFav(serie)">Remove</span> <i class="fa" ng-class="obj.getFavClass(serie)"></i>
+            </button>
+          </footer>
+        </section>
+
+
+      </article>
+    </div>
+
+
   </div>
 </div>

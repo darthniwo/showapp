@@ -6,12 +6,13 @@
       '$scope',
       '$sce',
       'commonSrv',
-      'movieId',
+      'itemId',
+      'kind',
       'close',
       modalCtrl,
     ]);
 
-  function modalCtrl($scope, $sce, commonSrv, movieId, close) {
+  function modalCtrl($scope, $sce, commonSrv, itemId, kind, close) {
     const modal = this,
       common = commonSrv;
 
@@ -24,7 +25,10 @@
     modal.getVideoId = () => {
       modal.loading = true;
       console.log(modal.loading);
-      const url = common.urls.movieDetail + movieId;
+      const url =
+        kind === 'movie'
+          ? common.urls.movieDetail + itemId
+          : common.urls.tvDetail + itemId;
       const videoURL = 'https://www.youtube.com/embed/';
       common.method.get(url, '&append_to_response=videos').then(() => {
         modal.trailer = $sce.trustAsResourceUrl(

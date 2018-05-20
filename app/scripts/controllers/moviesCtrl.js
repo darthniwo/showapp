@@ -76,7 +76,7 @@
     ctrl._setResults = data => {
       const {results, total_pages, total_results} = data;
       ctrl.state.movies = results;
-      ctrl.state.totalItems = total_results;
+      ctrl.state.totalItems = total_results > 20000 ? 20000 : total_results;
       ctrl.state.totalPages = total_pages;
     };
 
@@ -91,7 +91,8 @@
         controller: 'modalCtrl',
         controllerAs: 'obj',
         inputs: {
-          movieId,
+          itemId: movieId,
+          kind: 'movie',
         },
       }).then(function(modal) {
         modal.close.then(function(result) {});
